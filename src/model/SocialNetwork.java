@@ -71,16 +71,11 @@ public class SocialNetwork {
 						cola.add(u);
 						visitados.add(u);
 						
-						
-						if (!u.equals(u1) && !u1.getAmigos().contains(u)) {
+						if (!u1.getAmigos().contains(u)) {
 							System.out.println(u.getNombre());
 						}
 						
 					}
-					
-					
-					
-					
 					
 				}
 				
@@ -88,7 +83,6 @@ public class SocialNetwork {
 			
 		}
 		
-
 	}
 
 }

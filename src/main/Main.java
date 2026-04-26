@@ -1,14 +1,20 @@
 package main;
 
+import controller.GrafoController;
 import model.SocialNetwork;
 import model.User;
+import view.GrafoWindow;
 
 public class Main {
 
 	public static void main(String[] args) {
 		
 		SocialNetwork socialNetwork = new SocialNetwork();
+		
+		GrafoWindow window = new GrafoWindow();
+		new GrafoController(window.getGrafoView());
 
+		/*
 		// Crear usuarios
         User juan = new User("Juan");
         User maria = new User("Maria");
@@ -38,7 +44,7 @@ public class Main {
         // Sugerencias para Juan (debería mostrar Ana y Luis)
         System.out.println("\nSugerencias para Juan:");
         socialNetwork.verSugerencias(juan);
-		
+		*/
 		
 	}
 
