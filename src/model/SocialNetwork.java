@@ -10,16 +10,20 @@ import java.util.Queue;
 public class SocialNetwork {
 	
 	private Map<String, User> socialNetwork;
+	private int size;
 	
 	public SocialNetwork() {
 		socialNetwork = new HashMap<String, User>();
+		size = 0;
 	}
 
 	public void addUser(User u) {
 		
 		if (!socialNetwork.containsKey(u.getNombre())) {
 			socialNetwork.put(u.getNombre(), u);
+			size++;
 			System.out.println("Se añadió el usuario " + u.getNombre());
+			
 		}
 		
 	}
@@ -85,4 +89,8 @@ public class SocialNetwork {
 		
 	}
 
+	public int getSize() {
+		return size;
+	}
+	
 }
