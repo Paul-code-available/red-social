@@ -1,5 +1,9 @@
 package main;
 
+import javax.swing.UIManager;
+
+import com.formdev.flatlaf.FlatLightLaf;
+
 import controller.GrafoController;
 import model.SocialNetwork;
 import model.User;
@@ -8,6 +12,11 @@ import view.GrafoWindow;
 public class Main {
 
 	public static void main(String[] args) {
+		
+		FlatLightLaf.setup();
+		
+		UIManager.put("TextComponent.arc", 15);
+		UIManager.put("Button.arc", 10);
 		
 		SocialNetwork socialNetwork = new SocialNetwork();
 		
