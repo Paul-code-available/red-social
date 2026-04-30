@@ -16,13 +16,12 @@ public class Main {
 		FlatLightLaf.setup();
 		
 		UIManager.put("TextComponent.arc", 15);
-		UIManager.put("Button.arc", 10);
+		UIManager.put("Button.arc", 12);
 		
 		SocialNetwork socialNetwork = new SocialNetwork();
 		
 		GrafoWindow window = new GrafoWindow();
 		new GrafoController(window.getGrafoView());
-
 		
 		// Crear usuarios
         User juan = new User("Juan");

@@ -10,6 +10,5 @@ public class GrafoController {
 		this.grafoView = grafoView;
 	}
 	
-	
 
 }

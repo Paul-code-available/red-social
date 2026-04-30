@@ -10,7 +10,7 @@ public class GrafoWindow extends JFrame {
 	
 	public GrafoWindow() {
 		
-		setSize(900, 700);
+		setSize(1000, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
         setTitle("Red Social");

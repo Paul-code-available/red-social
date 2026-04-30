@@ -21,12 +21,15 @@ import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
 import model.SocialNetwork;
+import model.User;
 import util.Componentes;
 
 public class GrafoView extends JPanel {
 	
 	private JButton btnAgregarUsuario;
 	private JButton btnAgregarAmistad;
+	
+	private JButton  usuarioSeleccionado;
 	
 	public GrafoView() {
 		
@@ -53,11 +56,8 @@ public class GrafoView extends JPanel {
 		panelAcciones.setBorder(BorderFactory.createEmptyBorder(40, 10, 20, 10));
 		panelAcciones.setBackground(Color.decode("#DFE1E0"));
 		
-		JLabel title = new JLabel("Acciones");		
-		title.setForeground(Color.decode("#3673DF"));
-		title.setFont(new Font("Arial", Font.BOLD, 16));
-		title.setAlignmentX(Component.CENTER_ALIGNMENT);
-		panelAcciones.add(title);
+		JLabel lblTitle = Componentes.crearTitulo("Acciones");		
+		panelAcciones.add(lblTitle);
 		
 		panelAcciones.add(Box.createVerticalStrut(20));
 		
@@ -73,9 +73,10 @@ public class GrafoView extends JPanel {
 		
 		panelAcciones.add(Box.createVerticalStrut(15));
 		
-		JButton btnInformacion = Componentes.crearBtnInformacion("<html> Selecciona un usuario en el grafo para ver su información. </html>");
-		btnInformacion.setIcon(Componentes.cargarIcono("/asset/img/atencion.png", 24, 24));
-		panelAcciones.add(btnInformacion);
+		JButton informacionUtil = Componentes.crearBtnInformacion("<html> Selecciona un usuario en el grafo para ver su información. </html>");
+		informacionUtil.setIcon(Componentes.cargarIcono("/asset/img/atencion.png", 24, 24));
+		
+		panelAcciones.add(informacionUtil);
 		
 		add(panelAcciones, BorderLayout.WEST);
 		
@@ -97,13 +98,67 @@ public class GrafoView extends JPanel {
 		
 		JPanel panelInformacion = new JPanel();
 		panelInformacion.setLayout(new BoxLayout(panelInformacion, BoxLayout.Y_AXIS));
+		panelInformacion.setPreferredSize(new Dimension(220, 0));
+		panelInformacion.setBorder(BorderFactory.createEmptyBorder(40, 10, 20, 10));
+		panelInformacion.setBackground(Color.decode("#DFE1E0"));
 		
-		JLabel title = new JLabel("Informacion del Usuario");
+		JLabel title = Componentes.crearTitulo("Información del Usuario");
 		panelInformacion.add(title);
 		
+		panelInformacion.add(Box.createVerticalStrut(20));
+		
+		JLabel titleUsuario = new JLabel("Usuario Seleccionado");
+		titleUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelInformacion.add(titleUsuario);
+		
+		panelInformacion.add(Box.createVerticalStrut(5));
+		
+		usuarioSeleccionado = Componentes.crearBtnInformacion("");
+		usuarioSeleccionado.setMaximumSize(new Dimension(200, 80));
+		
+		panelInformacion.add(usuarioSeleccionado);
+		
+		panelInformacion.add(Box.createVerticalStrut(5));
+		
+		JLabel titleAmigos = new JLabel("Amigos");
+		titleAmigos.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelInformacion.add(titleAmigos);
+		
+		panelInformacion.add(Box.createVerticalStrut(5));
+		
+		JButton amigos = Componentes.crearBtnInformacion("");
+		amigos.setMaximumSize(new Dimension(200, 160));
+		panelInformacion.add(amigos);
+		
+		panelInformacion.add(Box.createVerticalStrut(5));
+		
+		JLabel titleSugerencias = new JLabel("Sugerencias");
+		titleSugerencias.setAlignmentX(Component.CENTER_ALIGNMENT);
+		panelInformacion.add(titleSugerencias);
+		
+		panelInformacion.add(Box.createVerticalStrut(5));
+		
+		JButton sugerencias = Componentes.crearBtnInformacion("");
+		sugerencias.setMaximumSize(new Dimension(200, 100));
+		panelInformacion.add(sugerencias);
+
 		add(panelInformacion, BorderLayout.EAST);
 		
 	}
+
+	public JButton getBtnAgregarUsuario() {
+		return btnAgregarUsuario;
+	}
+
+	public JButton getBtnAgregarAmistad() {
+		return btnAgregarAmistad;
+	}
+
+	public JButton getUsuarioSeleccionado() {
+		return usuarioSeleccionado;
+	}
+	
+	
 	
 	
 
