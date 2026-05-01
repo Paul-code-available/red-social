@@ -17,21 +17,17 @@ public class User {
 	public String getNombre() {
 		return nombre;
 	}
-
+	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public void addFriend(User u) {
+		amigos.add(u);
 	}
 
 	public List<User> getAmigos() {
 		return amigos;
 	}
-
-	public void setAmigos(List<User> amigos) {
-		this.amigos = amigos;
-	}
-	
-	
-	
-	
 
 }
