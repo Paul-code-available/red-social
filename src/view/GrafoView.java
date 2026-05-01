@@ -4,10 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -15,10 +15,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 import model.SocialNetwork;
 import model.User;
@@ -31,6 +27,8 @@ public class GrafoView extends JPanel {
 	
 	private JButton  usuarioSeleccionado;
 	
+	Map<String, int[]> posiciones = new HashMap<>();
+	
 	public GrafoView() {
 		
 		setLayout(new BorderLayout());
@@ -39,15 +37,9 @@ public class GrafoView extends JPanel {
 		panelGrafo();
 		panelInformacion();
 
+		
 	}
-	
-	protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        
-        // g.fillOval();
 
-	}
-	
 	public void panelAcciones() {
 		
 		JPanel panelAcciones = new JPanel();
@@ -145,7 +137,28 @@ public class GrafoView extends JPanel {
 		add(panelInformacion, BorderLayout.EAST);
 		
 	}
+	
+	public void calcularPosiciones(SocialNetwork socialNetwork) {
+		
+		List<String> usuarios = new ArrayList<>(socialNetwork.getUsuarios());
+		
+		int tamaño = usuarios.size();
+	    int centroX = getWidth() / 2;
+	    int centroY = getHeight() / 2;
+	    int radio = Math.min(getWidth(), getHeight()) / 3; // radio del círculo
 
+	    for (int i = 0; i < tamaño; i++) {
+	        // Ángulo para distribuir los nodos 
+	        double angulo = 2 * Math.PI * i / tamaño;
+
+	        int x = (int) (centroX + radio * Math.cos(angulo));
+	        int y = (int) (centroY + radio * Math.sin(angulo));
+
+	        posiciones.put(usuarios.get(i), new int[]{x, y});
+	        
+	    }
+	}
+		
 	public JButton getBtnAgregarUsuario() {
 		return btnAgregarUsuario;
 	}

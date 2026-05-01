@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 public class SocialNetwork {
 	
@@ -19,25 +20,40 @@ public class SocialNetwork {
 
 	public void addUser(User u) {
 		
-		if (!socialNetwork.containsKey(u.getNombre())) {
-			socialNetwork.put(u.getNombre(), u);
-			size++;
-			System.out.println("Se añadió el usuario " + u.getNombre());
-			
+		// falta validar espacios en blanco
+		
+		u.setNombre(u.getNombre().toLowerCase());
+		
+		for (String users : socialNetwork.keySet()) {
+			if (users.equals(u.getNombre())) {
+				return;
+			}
 		}
+		
+		socialNetwork.put(u.getNombre(), u);
+		size++;
+		System.out.println("Se añadió el usuario " + u.getNombre());
 		
 	}
 	
 	public void addFriend(User u1, User u2) {
 		
+		if (u1 == null  || u2 == null) {
+			return;
+		}
+		
+		if (!socialNetwork.containsKey(u1.getNombre()) || !socialNetwork.containsKey(u2.getNombre())) {
+			return;
+		}
+		
 		for (User u : u1.getAmigos()) {
-			if (u.equals(u2)) {
+			if (u.getNombre().equals(u2.getNombre())) {
 				return;
 			}
 		}
 		
-		u1.getAmigos().add(u2);
-		u2.getAmigos().add(u1);
+		u1.addFriend(u2);
+		u2.addFriend(u1);
 		
 		System.out.println(u1.getNombre() + " y " + u2.getNombre() + " ahora son amigos");
 		
@@ -87,6 +103,15 @@ public class SocialNetwork {
 			
 		}
 		
+	}
+	
+	public User buscarUsuario(String nombre) {
+		
+		return socialNetwork.get(nombre.toLowerCase());
+	}
+	
+	public Set<String> getUsuarios() {
+		return socialNetwork.keySet();
 	}
 
 	public int getSize() {

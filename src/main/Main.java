@@ -21,8 +21,9 @@ public class Main {
 		SocialNetwork socialNetwork = new SocialNetwork();
 		
 		GrafoWindow window = new GrafoWindow();
-		new GrafoController(window.getGrafoView());
+		new GrafoController(window.getGrafoView(), socialNetwork);
 		
+		/*
 		// Crear usuarios
         User juan = new User("Juan");
         User maria = new User("Maria");
@@ -54,6 +55,8 @@ public class Main {
         socialNetwork.verSugerencias(juan);
 		
         System.out.println("Cantidad de usuarios: " + socialNetwork.getSize());
+        
+        */
         
 		
 	}

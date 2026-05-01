@@ -16,7 +16,6 @@ public class GrafoWindow extends JFrame {
         setTitle("Red Social");
         
         grafoView = new GrafoView();
-        new GrafoController(grafoView);
         add(grafoView);
         setVisible(true);
         
