@@ -65,6 +65,7 @@ public class Componentes {
     public static JButton crearBtnInformacion(String nombre) {
     	
     	JButton btn = new JButton(nombre);
+    	btn.setOpaque(false);
     	btn.setBackground(Color.decode("#F7F8FB"));
     	btn.setRolloverEnabled(false);
     	btn.setFont(new Font("Arial", Font.PLAIN, 12));

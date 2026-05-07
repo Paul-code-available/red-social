@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ import javax.swing.JPanel;
 
 import model.SocialNetwork;
 import model.User;
+
 import util.Componentes;
 
 public class GrafoView extends JPanel {
@@ -26,6 +28,8 @@ public class GrafoView extends JPanel {
 	private JButton btnAgregarAmistad;
 	
 	private JButton  usuarioSeleccionado;
+	
+	private JPanel panelGrafo;
 	
 	Map<String, int[]> posiciones = new HashMap<>();
 	
@@ -76,15 +80,70 @@ public class GrafoView extends JPanel {
 	
 	public void panelGrafo() {
 		
-		JPanel panelGrafo = new JPanel();
-		panelGrafo.setLayout(new BoxLayout(panelGrafo, BoxLayout.Y_AXIS));
+		panelGrafo = new JPanel() {
+			 @Override
+			 protected void paintComponent(Graphics g) {
+			     super.paintComponent(g); 
+			        
+			     g.setColor(Color.decode("#16374E"));
+			        
+			     if (!posiciones.isEmpty()) {
+			        
+			    	 for (String usuarios : posiciones.keySet()) {
+			    		 int[] coords = posiciones.get(usuarios);
+				    	 
+				    	 if (coords != null) {
+				    		 g.fillOval(coords[0], coords[1], 80, 80);
+				    	 }
+					}
+			    	 
+			    	 
+			     
+			     }
+ 
+			 }
+		};
 		
+		panelGrafo.setLayout(new BoxLayout(panelGrafo, BoxLayout.Y_AXIS));
 		JLabel title = new JLabel("Grafo de la Red");
 		panelGrafo.add(title);
-		
 		add(panelGrafo, BorderLayout.CENTER);
 		
 	}
+	
+public void calcularPosiciones(SocialNetwork socialNetwork) {
+		
+		List<String> usuarios = new ArrayList<>(socialNetwork.getUsuarios());
+
+		int tamaño = usuarios.size();
+	    int centroX = (panelGrafo.getWidth() / 2);
+	    int centroY = (panelGrafo.getHeight() / 2);
+	    
+	    System.out.println("ancho: " + centroX + " alto: " + centroY);
+	    
+	    int radio = Math.min(centroX, centroY) / 3; // radio del círculo
+
+	    for (int i = 0; i < tamaño; i++) {
+	        // Ángulo para distribuir los nodos 
+	        double angulo = 2 * Math.PI * i / tamaño;
+
+	        int x = (int) (centroX + radio * Math.cos(angulo));
+	        int y = (int) (centroY + radio * Math.sin(angulo));
+	        
+	        System.out.println("x: " + x + " y: " + y);
+	        System.out.println("Usuario null? " + usuarios.get(i));
+	        
+
+	        posiciones.put(usuarios.get(i), new int[]{x, y});
+	        panelGrafo.repaint();
+	    }
+	}
+
+	public void repaintGrafo() {
+		panelGrafo.repaint(); 
+	}
+	
+	
 	
 	public void panelInformacion() {
 		
@@ -138,26 +197,7 @@ public class GrafoView extends JPanel {
 		
 	}
 	
-	public void calcularPosiciones(SocialNetwork socialNetwork) {
-		
-		List<String> usuarios = new ArrayList<>(socialNetwork.getUsuarios());
-		
-		int tamaño = usuarios.size();
-	    int centroX = getWidth() / 2;
-	    int centroY = getHeight() / 2;
-	    int radio = Math.min(getWidth(), getHeight()) / 3; // radio del círculo
-
-	    for (int i = 0; i < tamaño; i++) {
-	        // Ángulo para distribuir los nodos 
-	        double angulo = 2 * Math.PI * i / tamaño;
-
-	        int x = (int) (centroX + radio * Math.cos(angulo));
-	        int y = (int) (centroY + radio * Math.sin(angulo));
-
-	        posiciones.put(usuarios.get(i), new int[]{x, y});
-	        
-	    }
-	}
+	
 		
 	public JButton getBtnAgregarUsuario() {
 		return btnAgregarUsuario;

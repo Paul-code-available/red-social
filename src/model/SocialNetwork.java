@@ -20,7 +20,7 @@ public class SocialNetwork {
 
 	public void addUser(User u) {
 		
-		// falta validar espacios en blanco
+		// falta validar espacios en blanco y null
 		
 		u.setNombre(u.getNombre().toLowerCase());
 		
@@ -32,7 +32,7 @@ public class SocialNetwork {
 		
 		socialNetwork.put(u.getNombre(), u);
 		size++;
-		System.out.println("Se añadió el usuario " + u.getNombre());
+		// System.out.println("Se añadió el usuario " + u.getNombre());
 		
 	}
 	
@@ -106,7 +106,7 @@ public class SocialNetwork {
 	}
 	
 	public User buscarUsuario(String nombre) {
-		
+		// falta validar null
 		return socialNetwork.get(nombre.toLowerCase());
 	}
 	

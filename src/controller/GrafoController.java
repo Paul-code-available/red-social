@@ -16,19 +16,25 @@ public class GrafoController {
 		this.socialNetwork = socialNetwork;
 		
 		acciones();
+		
 	}
 	
 	public void acciones() {
 		
 		grafoView.getBtnAgregarUsuario().addActionListener(e -> {
 			socialNetwork.addUser(new User(JOptionPane.showInputDialog("Ingresa el nombre: ")));
-				
+			
+			grafoView.calcularPosiciones(socialNetwork);
+			
+			grafoView.repaintGrafo();
+
 		});
 		
 		grafoView.getBtnAgregarAmistad().addActionListener(e -> {
 			
 			socialNetwork.addFriend(socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 1:")), 
 									socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 2:")));
+		
 			
 		});
 		
