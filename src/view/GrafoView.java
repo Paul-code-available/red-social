@@ -121,7 +121,7 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 	    
 	    System.out.println("ancho: " + centroX + " alto: " + centroY);
 	    
-	    int radio = Math.min(centroX, centroY) / 3; // radio del círculo
+	    int radio = Math.min(panelGrafo.getWidth(), panelGrafo.getHeight()) / 3; // radio del círculo
 
 	    for (int i = 0; i < tamaño; i++) {
 	        // Ángulo para distribuir los nodos 
