@@ -110,10 +110,9 @@ public class SocialNetwork {
 		return socialNetwork.get(nombre.toLowerCase());
 	}
 	
-	public Set<String> getUsuarios() {
-		return socialNetwork.keySet();
+	public List<User> getUsers() {
+	    return new ArrayList<>(socialNetwork.values());
 	}
-
 	public int getSize() {
 		return size;
 	}

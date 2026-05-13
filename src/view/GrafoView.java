@@ -27,11 +27,12 @@ public class GrafoView extends JPanel {
 	private JButton btnAgregarUsuario;
 	private JButton btnAgregarAmistad;
 	
-	private JButton  usuarioSeleccionado;
+	private JButton usuarioSeleccionado;
 	
 	private JPanel panelGrafo;
 	
 	Map<String, int[]> posiciones = new HashMap<>();
+	Map<String, List<User>> friends = new HashMap<>();
 	
 	public GrafoView() {
 		
@@ -85,22 +86,35 @@ public class GrafoView extends JPanel {
 			 protected void paintComponent(Graphics g) {
 			     super.paintComponent(g); 
 			        
-			     g.setColor(Color.decode("#16374E"));
+			     g.setColor(Color.decode("#3673DF"));
 			        
 			     if (!posiciones.isEmpty()) {
 			        
-			    	 for (String usuarios : posiciones.keySet()) {
-			    		 int[] coords = posiciones.get(usuarios);
+			    	 for (String user : posiciones.keySet()) {
+			    		 int[] coords = posiciones.get(user); 
 				    	 
 				    	 if (coords != null) {
 				    		 g.fillOval(coords[0], coords[1], 80, 80);
+				    		 g.setColor(Color.BLACK);
+				    		 g.drawString(user, coords[0]+40, coords[1]+40);
+				    		
 				    	 }
-					}
-			    	 
-			    	 
+				    	 
+				    	 g.setColor(Color.decode("#3673DF"));
+				    	 for (User amistad : friends.get(user)) {
+				    		 int[] coords2 = posiciones.get(amistad.getNombre()); 
+				    		 
+				    		 if (coords2 != null) {
+				    			 g.drawLine(coords[0]+40, coords[1]+40, coords2[0]+40, coords2[1]+40);
+ 
+							}
+				    	
+						}
+				    	 
+					}			    	
 			     
 			     }
- 
+
 			 }
 		};
 		
@@ -113,13 +127,11 @@ public class GrafoView extends JPanel {
 	
 public void calcularPosiciones(SocialNetwork socialNetwork) {
 		
-		List<String> usuarios = new ArrayList<>(socialNetwork.getUsuarios());
+		List<User> usuarios = socialNetwork.getUsers();
 
 		int tamaño = usuarios.size();
 	    int centroX = (panelGrafo.getWidth() / 2);
 	    int centroY = (panelGrafo.getHeight() / 2);
-	    
-	    System.out.println("ancho: " + centroX + " alto: " + centroY);
 	    
 	    int radio = Math.min(panelGrafo.getWidth(), panelGrafo.getHeight()) / 3; // radio del círculo
 
@@ -129,21 +141,13 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 
 	        int x = (int) (centroX + radio * Math.cos(angulo));
 	        int y = (int) (centroY + radio * Math.sin(angulo));
+	           
+	        friends.put(usuarios.get(i).getNombre(), usuarios.get(i).getAmigos());
 	        
-	        System.out.println("x: " + x + " y: " + y);
-	        System.out.println("Usuario null? " + usuarios.get(i));
-	        
-
-	        posiciones.put(usuarios.get(i), new int[]{x, y});
+	        posiciones.put(usuarios.get(i).getNombre(), new int[]{x, y});
 	        panelGrafo.repaint();
 	    }
 	}
-
-	public void repaintGrafo() {
-		panelGrafo.repaint(); 
-	}
-	
-	
 	
 	public void panelInformacion() {
 		

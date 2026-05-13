@@ -26,7 +26,7 @@ public class GrafoController {
 			
 			grafoView.calcularPosiciones(socialNetwork);
 			
-			grafoView.repaintGrafo();
+			grafoView.repaint();
 
 		});
 		
@@ -34,7 +34,8 @@ public class GrafoController {
 			
 			socialNetwork.addFriend(socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 1:")), 
 									socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 2:")));
-		
+			
+			grafoView.repaint();
 			
 		});
 		
