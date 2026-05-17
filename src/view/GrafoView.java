@@ -26,10 +26,14 @@ public class GrafoView extends JPanel {
 	
 	private JButton btnAgregarUsuario;
 	private JButton btnAgregarAmistad;
-	
-	private JButton usuarioSeleccionado;
-	
+	private JButton btnUsuarioSeleccionado;
+		
+	JLabel usuario;
+	JLabel amigos;
+	JLabel sugerencias;
+
 	private JPanel panelGrafo;
+
 	
 	Map<String, int[]> posiciones = new HashMap<>();
 	Map<String, List<User>> friends = new HashMap<>();
@@ -70,9 +74,14 @@ public class GrafoView extends JPanel {
 		
 		panelAcciones.add(Box.createVerticalStrut(15));
 		
+		btnUsuarioSeleccionado = Componentes.crearBtnAccion("<html> Seleccionar usuario </html>");
+		btnUsuarioSeleccionado.setIcon(Componentes.cargarIcono("/asset/img/escoger (1).png", 28, 28));
+		panelAcciones.add(btnUsuarioSeleccionado);
+		
+		panelAcciones.add(Box.createVerticalStrut(15));
+		
 		JButton informacionUtil = Componentes.crearBtnInformacion("<html> Selecciona un usuario en el grafo para ver su información. </html>");
 		informacionUtil.setIcon(Componentes.cargarIcono("/asset/img/atencion.png", 24, 24));
-		
 		panelAcciones.add(informacionUtil);
 		
 		add(panelAcciones, BorderLayout.WEST);
@@ -92,15 +101,8 @@ public class GrafoView extends JPanel {
 			        
 			    	 for (String user : posiciones.keySet()) {
 			    		 int[] coords = posiciones.get(user); 
-				    	 
-				    	 if (coords != null) {
-				    		 g.fillOval(coords[0], coords[1], 80, 80);
-				    		 g.setColor(Color.BLACK);
-				    		 g.drawString(user, coords[0]+40, coords[1]+40);
-				    		
-				    	 }
-				    	 
-				    	 g.setColor(Color.decode("#3673DF"));
+			    		 
+			    		 g.setColor(Color.decode("#3673DF"));
 				    	 for (User amistad : friends.get(user)) {
 				    		 int[] coords2 = posiciones.get(amistad.getNombre()); 
 				    		 
@@ -109,7 +111,16 @@ public class GrafoView extends JPanel {
  
 							}
 				    	
-						}
+				    	 }
+				    	 
+				    	 if (coords != null) {
+				    		 g.fillOval(coords[0], coords[1], 80, 80);
+				    		 g.setColor(Color.BLACK);
+				    		 g.drawString(user, coords[0]+40, coords[1]+40);
+				    		
+				    	 }
+				    	 
+				    	 
 				    	 
 					}			    	
 			     
@@ -168,10 +179,13 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 		
 		panelInformacion.add(Box.createVerticalStrut(5));
 		
-		usuarioSeleccionado = Componentes.crearBtnInformacion("");
-		usuarioSeleccionado.setMaximumSize(new Dimension(200, 80));
+		JPanel panelUsuario = Componentes.createPanel();
+		panelUsuario.setMaximumSize(new Dimension(200, 80));
 		
-		panelInformacion.add(usuarioSeleccionado);
+		usuario = new JLabel("");
+		panelUsuario.add(usuario);
+		
+		panelInformacion.add(panelUsuario);
 		
 		panelInformacion.add(Box.createVerticalStrut(5));
 		
@@ -181,10 +195,13 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 		
 		panelInformacion.add(Box.createVerticalStrut(5));
 		
-		JButton amigos = Componentes.crearBtnInformacion("");
-		amigos.setMaximumSize(new Dimension(200, 160));
-		panelInformacion.add(amigos);
+		JPanel panelAmigos = Componentes.createPanel();
+		panelAmigos.setMaximumSize(new Dimension(200, 160));
+		panelInformacion.add(panelAmigos);
 		
+		amigos = new JLabel("");
+		panelAmigos.add(amigos);
+
 		panelInformacion.add(Box.createVerticalStrut(5));
 		
 		JLabel titleSugerencias = new JLabel("Sugerencias");
@@ -193,16 +210,17 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 		
 		panelInformacion.add(Box.createVerticalStrut(5));
 		
-		JButton sugerencias = Componentes.crearBtnInformacion("");
-		sugerencias.setMaximumSize(new Dimension(200, 100));
-		panelInformacion.add(sugerencias);
+		JPanel panelSugerencias = Componentes.createPanel();
+		panelSugerencias.setMaximumSize(new Dimension(200, 100));
+		panelInformacion.add(panelSugerencias);
+		
+		sugerencias = new JLabel("");
+		panelSugerencias.add(sugerencias);
 
 		add(panelInformacion, BorderLayout.EAST);
 		
 	}
 	
-	
-		
 	public JButton getBtnAgregarUsuario() {
 		return btnAgregarUsuario;
 	}
@@ -211,9 +229,27 @@ public void calcularPosiciones(SocialNetwork socialNetwork) {
 		return btnAgregarAmistad;
 	}
 
-	public JButton getUsuarioSeleccionado() {
-		return usuarioSeleccionado;
+	public JButton getBtnUsuarioSeleccionado() {
+		return btnUsuarioSeleccionado;
 	}
+
+	public JLabel getAmigos() {
+		return amigos;
+	}
+
+	public JLabel getUsuario() {
+		return usuario;
+	}
+
+	public JLabel getSugerencias() {
+		return sugerencias;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

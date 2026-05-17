@@ -23,7 +23,8 @@ public class Main {
 		GrafoWindow window = new GrafoWindow();
 		new GrafoController(window.getGrafoView(), socialNetwork);
 		
-		/*
+	
+		
 		// Crear usuarios
         User juan = new User("Juan");
         User maria = new User("Maria");
@@ -40,24 +41,11 @@ public class Main {
         socialNetwork.addUser(juan); // duplicado, no debería agregarse
 
         // Crear amistades
-        socialNetwork.addFriend(juan, maria);
-        socialNetwork.addFriend(juan, pedro);
-        socialNetwork.addFriend(maria, ana);
-        socialNetwork.addFriend(pedro, luis);
-        socialNetwork.addFriend(juan, maria); // duplicado, no debería agregarse
-
-        // Ver amigos de Juan
-        System.out.println("\nAmigos de Juan:");
-        socialNetwork.verAmigos(juan);
-
-        // Sugerencias para Juan (debería mostrar Ana y Luis)
-        System.out.println("\nSugerencias para Juan:");
-        socialNetwork.verSugerencias(juan);
-		
-        System.out.println("Cantidad de usuarios: " + socialNetwork.getSize());
-        
-        */
-        
+        socialNetwork.addFriend("juan", "maria");
+        socialNetwork.addFriend("juan", "pedro");
+        socialNetwork.addFriend("maria", "ana");
+        socialNetwork.addFriend("pedro", "luis");
+        socialNetwork.addFriend("juan", "maria"); // duplicado, no debería agregarse          
 		
 	}
 

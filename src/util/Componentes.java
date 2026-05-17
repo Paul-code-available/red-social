@@ -12,6 +12,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class Componentes {
 	
@@ -74,6 +75,14 @@ public class Componentes {
     	
     	return btn;
     	
+    }
+    
+    public static JPanel createPanel() {
+    	
+    	JPanel panel = new JPanel();
+		panel.setBackground(Color.decode("#F7F8FB"));
+		
+		return panel;
     }
     
     

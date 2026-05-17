@@ -32,13 +32,16 @@ public class SocialNetwork {
 		
 		socialNetwork.put(u.getNombre(), u);
 		size++;
-		// System.out.println("Se añadió el usuario " + u.getNombre());
+		System.out.println("Se añadió el usuario " + u.getNombre());
 		
 	}
 	
-	public void addFriend(User u1, User u2) {
+	public void addFriend(String n1, String n2) {
 		
-		if (u1 == null  || u2 == null) {
+		User u1 = buscarUsuario(n1);
+		User u2 = buscarUsuario(n2);
+		
+		if (u1 == null|| u2 == null) {
 			return;
 		}
 		
@@ -59,25 +62,44 @@ public class SocialNetwork {
 		
 	}
 	
-	public void verAmigos(User u1) {
+	public User buscarUsuario(String nombre) {
+		// falta validar null
+		return socialNetwork.get(nombre.toLowerCase());
+	}
+	
+
+	public String verAmigos(User u1) {
 		
 		if (u1.getAmigos().isEmpty()) {
-			return;
+			return "";
 		}
 		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<html>");
 		for (User u : u1.getAmigos()) {
-			System.out.println(u.getNombre());
+			sb.append(u.getNombre() + "<br>");
 		}
+		sb.append("</html>");
+		
+		
+		String amigos = sb.toString();
+		
+		return amigos;
 		
 	}
 	
-	public void verSugerencias(User u1) {
+	public String verSugerencias(User u1) {
 		
 		Queue<User> cola = new LinkedList<User>();
 		List<User> visitados = new ArrayList<User>();
 		
 		cola.add(u1);
 		visitados.add(u1);
+		
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("<html>");
 		
 		while (!cola.isEmpty()) {
 			
@@ -92,7 +114,7 @@ public class SocialNetwork {
 						visitados.add(u);
 						
 						if (!u1.getAmigos().contains(u)) {
-							System.out.println(u.getNombre());
+							sb.append(u.getNombre());
 						}
 						
 					}
@@ -103,12 +125,13 @@ public class SocialNetwork {
 			
 		}
 		
-	}
-	
-	public User buscarUsuario(String nombre) {
-		// falta validar null
-		return socialNetwork.get(nombre.toLowerCase());
-	}
+		sb.append("</html>");
+		
+		
+		String sugerencias = sb.toString();
+		
+		return sugerencias;
+	}	
 	
 	public List<User> getUsers() {
 	    return new ArrayList<>(socialNetwork.values());

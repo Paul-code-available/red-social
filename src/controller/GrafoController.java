@@ -14,7 +14,7 @@ public class GrafoController {
 	public GrafoController(GrafoView grafoView, SocialNetwork socialNetwork) {
 		this.grafoView = grafoView;
 		this.socialNetwork = socialNetwork;
-		
+
 		acciones();
 		
 	}
@@ -32,10 +32,23 @@ public class GrafoController {
 		
 		grafoView.getBtnAgregarAmistad().addActionListener(e -> {
 			
-			socialNetwork.addFriend(socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 1:")), 
-									socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Usuario 2:")));
+			socialNetwork.addFriend(JOptionPane.showInputDialog("Usuario 1:"), 
+									JOptionPane.showInputDialog("Usuario 2:"));
 			
 			grafoView.repaint();
+			
+		});
+		
+		grafoView.getBtnUsuarioSeleccionado().addActionListener(e -> {
+			
+			User user = socialNetwork.buscarUsuario(JOptionPane.showInputDialog("Ingresa el nombre: "));
+			
+			grafoView.getUsuario().setText(user.getNombre());
+			
+			grafoView.getAmigos().setText(socialNetwork.verAmigos(user));			
+			
+			grafoView.getSugerencias().setText(socialNetwork.verSugerencias(user));
+			
 			
 		});
 		
