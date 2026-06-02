@@ -20,15 +20,19 @@ public class SocialNetwork {
 
 	public void addUser(User u) {
 		
-		// falta validar espacios en blanco
+		// falta validar espacios en blanco y null
 		
-		u.setNombre(u.getNombre().toLowerCase());
+		if (u == null) {
+			return;
+		}
 		
 		for (String users : socialNetwork.keySet()) {
-			if (users.equals(u.getNombre())) {
+			if (users.equalsIgnoreCase(u.getNombre())) {
 				return;
 			}
 		}
+		
+		u.setNombre(u.getNombre().toLowerCase());
 		
 		socialNetwork.put(u.getNombre(), u);
 		size++;
@@ -36,9 +40,12 @@ public class SocialNetwork {
 		
 	}
 	
-	public void addFriend(User u1, User u2) {
+	public void addFriend(String n1, String n2) {
 		
-		if (u1 == null  || u2 == null) {
+		User u1 = buscarUsuario(n1);
+		User u2 = buscarUsuario(n2);
+		
+		if (u1 == null|| u2 == null) {
 			return;
 		}
 		
@@ -59,22 +66,35 @@ public class SocialNetwork {
 		
 	}
 	
-	public void verAmigos(User u1) {
-		
-		if (u1.getAmigos().isEmpty()) {
-			return;
-		}
-		
-		for (User u : u1.getAmigos()) {
-			System.out.println(u.getNombre());
-		}
-		
+	public User buscarUsuario(String nombre) {
+		// falta validar null
+		return socialNetwork.get(nombre.toLowerCase());
 	}
 	
-	public void verSugerencias(User u1) {
+	/*
+	public ArrayList<String> verAmigos(User u1) {
+		
+		ArrayList<String> amigos = new ArrayList<String>();
+		
+		if (!u1.getAmigos().isEmpty()) {
+			
+			for (User u : u1.getAmigos()) {
+				amigos.add(u.getNombre());
+			}
+			
+		}
+		
+		return amigos;
+
+	}
+	*/
+	
+	public ArrayList<User> verSugerencias(User u1) {
 		
 		Queue<User> cola = new LinkedList<User>();
 		List<User> visitados = new ArrayList<User>();
+		
+		ArrayList<User> sugestions = new ArrayList<>();
 		
 		cola.add(u1);
 		visitados.add(u1);
@@ -92,7 +112,7 @@ public class SocialNetwork {
 						visitados.add(u);
 						
 						if (!u1.getAmigos().contains(u)) {
-							System.out.println(u.getNombre());
+							sugestions.add(u);
 						}
 						
 					}
@@ -102,18 +122,13 @@ public class SocialNetwork {
 			}
 			
 		}
-		
-	}
-	
-	public User buscarUsuario(String nombre) {
-		
-		return socialNetwork.get(nombre.toLowerCase());
-	}
-	
-	public Set<String> getUsuarios() {
-		return socialNetwork.keySet();
-	}
 
+		return sugestions;
+	}	
+	
+	public List<User> getUsers() {
+	    return new ArrayList<>(socialNetwork.values());
+	}
 	public int getSize() {
 		return size;
 	}
