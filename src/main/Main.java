@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.UIManager;
 
+import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
 
 import controller.GrafoController;
@@ -13,7 +14,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		FlatLightLaf.setup();
+		FlatDarkLaf.setup();
 		
 		UIManager.put("TextComponent.arc", 15);
 		UIManager.put("Button.arc", 12);
@@ -22,8 +23,6 @@ public class Main {
 		
 		GrafoWindow window = new GrafoWindow();
 		new GrafoController(window.getGrafoView(), socialNetwork);
-		
-	
 		
 		// Crear usuarios
         User juan = new User("Juan");

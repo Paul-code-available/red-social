@@ -29,5 +29,9 @@ public class User {
 	public List<User> getAmigos() {
 		return amigos;
 	}
+	
+	public int getNumberOfFriends() {
+		return amigos.size();
+	}
 
 }

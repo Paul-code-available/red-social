@@ -22,13 +22,17 @@ public class SocialNetwork {
 		
 		// falta validar espacios en blanco y null
 		
-		u.setNombre(u.getNombre().toLowerCase());
+		if (u == null) {
+			return;
+		}
 		
 		for (String users : socialNetwork.keySet()) {
-			if (users.equals(u.getNombre())) {
+			if (users.equalsIgnoreCase(u.getNombre())) {
 				return;
 			}
 		}
+		
+		u.setNombre(u.getNombre().toLowerCase());
 		
 		socialNetwork.put(u.getNombre(), u);
 		size++;
@@ -67,39 +71,33 @@ public class SocialNetwork {
 		return socialNetwork.get(nombre.toLowerCase());
 	}
 	
-
-	public String verAmigos(User u1) {
+	/*
+	public ArrayList<String> verAmigos(User u1) {
 		
-		if (u1.getAmigos().isEmpty()) {
-			return "";
+		ArrayList<String> amigos = new ArrayList<String>();
+		
+		if (!u1.getAmigos().isEmpty()) {
+			
+			for (User u : u1.getAmigos()) {
+				amigos.add(u.getNombre());
+			}
+			
 		}
-		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<html>");
-		for (User u : u1.getAmigos()) {
-			sb.append(u.getNombre() + "<br>");
-		}
-		sb.append("</html>");
-		
-		
-		String amigos = sb.toString();
 		
 		return amigos;
-		
+
 	}
+	*/
 	
-	public String verSugerencias(User u1) {
+	public ArrayList<User> verSugerencias(User u1) {
 		
 		Queue<User> cola = new LinkedList<User>();
 		List<User> visitados = new ArrayList<User>();
 		
+		ArrayList<User> sugestions = new ArrayList<>();
+		
 		cola.add(u1);
 		visitados.add(u1);
-		
-		StringBuilder sb = new StringBuilder();
-		
-		sb.append("<html>");
 		
 		while (!cola.isEmpty()) {
 			
@@ -114,7 +112,7 @@ public class SocialNetwork {
 						visitados.add(u);
 						
 						if (!u1.getAmigos().contains(u)) {
-							sb.append(u.getNombre());
+							sugestions.add(u);
 						}
 						
 					}
@@ -124,13 +122,8 @@ public class SocialNetwork {
 			}
 			
 		}
-		
-		sb.append("</html>");
-		
-		
-		String sugerencias = sb.toString();
-		
-		return sugerencias;
+
+		return sugestions;
 	}	
 	
 	public List<User> getUsers() {

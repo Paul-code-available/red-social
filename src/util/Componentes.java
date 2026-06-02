@@ -30,7 +30,8 @@ public class Componentes {
     	
     	JButton btn = new JButton(nombre);
     	btn.setMaximumSize(new Dimension(160, 70));
-		btn.setBackground(Color.decode("#F7F8FB"));
+		btn.setBackground(Color.decode("#0E1722"));
+		btn.setForeground(Color.decode("#FEFCFC"));
 		btn.setFont(new Font("Arial", Font.PLAIN, 12));
 		btn.setIconTextGap(10);
 		btn.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -55,8 +56,8 @@ public class Componentes {
     public static JLabel crearTitulo(String nombre) {
     	
     	JLabel lbl = new JLabel(nombre);
-    	lbl.setForeground(Color.decode("#023e8a"));
-		lbl.setFont(new Font("Arial", Font.BOLD, 16));
+    	lbl.setForeground(Color.decode("#2462C8"));
+		lbl.setFont(new Font("Arial", Font.BOLD, 14));
 		lbl.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		return lbl;
@@ -80,9 +81,23 @@ public class Componentes {
     public static JPanel createPanel() {
     	
     	JPanel panel = new JPanel();
-		panel.setBackground(Color.decode("#F7F8FB"));
+		panel.setBackground(Color.decode("#FEFCFC"));
 		
 		return panel;
+    }
+    
+    public static JLabel createLblUsers(String name) {
+    	
+    	JLabel friend = new JLabel(name);
+    	
+    	friend.setPreferredSize(new Dimension(180, 15));
+    	friend.setIconTextGap(10);
+		friend.setForeground(Color.BLACK);
+		friend.setAlignmentX(Component.LEFT_ALIGNMENT);
+    	friend.setIcon(cargarIcono("/asset/img/cuenta.png", 16,16));
+    	
+    	return friend;
+    	
     }
     
     
